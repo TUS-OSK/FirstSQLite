@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="FirstSQLite.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FirstSQLite"
+    xmlns:vm="using:FirstSQLite.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
+    <Page.DataContext>
+        <vm:ViewModel/>
+    </Page.DataContext>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <TextBox Name="NewBlogUrl" Text="{Binding NewBlogText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Button Content="Add" Command="{Binding AddCommand}" CommandParameter="0"/>
+            <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="1"/>
+            <ListView Height="500" 
+                      ScrollViewer.VerticalScrollMode="Auto" 
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                      Name="Blogs"
+                      ItemsSource="{Binding ItemSources,Mode=TwoWay}"
+                      SelectedIndex="{Binding SelectedIndexes,Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Url,Mode=TwoWay}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>
